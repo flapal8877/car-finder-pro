@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+# CarFinder Pro - Frontend
 
-## Project info
+A modern, real-time vehicle sourcing tool that searches 35+ marketplaces for private-party deals. Built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/b4186dfd-9803-49fc-96aa-666ceca7f0f7
+## Features
 
-## How can I edit this code?
+- 🚗 **Multi-Source Search**: Searches Facebook Marketplace, Craigslist, eBay Motors, and 30+ more platforms
+- ⚡ **Real-Time Progress**: Live updates showing which sites are being searched
+- 📊 **Smart Results**: Sortable table with filtering capabilities
+- 📥 **Export to CSV**: One-click export of all results with timestamp
+- 🎨 **Beautiful UI**: Modern gradient design with dark mode support
+- 📱 **Responsive**: Works perfectly on mobile, tablet, and desktop
 
-There are several ways of editing your application.
+## Setup
 
-**Use Lovable**
+### 1. Configure Railway Backend URL
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b4186dfd-9803-49fc-96aa-666ceca7f0f7) and start prompting.
+Create a `.env` file in the root directory:
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+VITE_RAILWAY_API_URL=https://your-app.railway.app
+```
 
-**Use your preferred IDE**
+Or use the in-app configuration dialog if you haven't set an environment variable.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 2. Install Dependencies
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+npm install
+```
 
-Follow these steps:
+### 3. Run Development Server
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Railway Backend Requirements
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Your Railway Python backend should expose the following endpoint:
 
-**Use GitHub Codespaces**
+### `POST /api/search`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+**Request Body:**
+```json
+{
+  "keyword": "Honda Civic",
+  "location": "Los Angeles, CA",
+  "maxPrice": 25000
+}
+```
 
-## What technologies are used for this project?
+**Response:** Server-Sent Events (SSE) stream
 
-This project is built with:
+**Progress Events:**
+```
+data: {"type": "progress", "current": 5, "total": 35, "site": "Facebook Marketplace"}
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+**Result Events:**
+```
+data: {"type": "result", "vehicle": {
+  "id": "unique-id",
+  "source": "Facebook Marketplace",
+  "title": "2020 Honda Civic",
+  "price": 18500,
+  "location": "Los Angeles, CA",
+  "url": "https://...",
+  "timestamp": "2025-01-14T12:00:00Z"
+}}
+```
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/b4186dfd-9803-49fc-96aa-666ceca7f0f7) and click on Share -> Publish.
+```
+src/
+├── components/
+│   ├── SearchForm.tsx          # Search input form
+│   ├── ProgressIndicator.tsx   # Real-time progress bar
+│   ├── ResultsTable.tsx        # Sortable results table
+│   └── ApiConfigBanner.tsx     # API configuration UI
+├── services/
+│   └── api.ts                  # Railway API client
+├── types/
+│   └── vehicle.ts              # TypeScript interfaces
+└── pages/
+    └── Index.tsx               # Main application page
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Technologies
 
-Yes, you can!
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Shadcn/ui** - UI components
+- **Lucide React** - Icons
+- **Vite** - Build tool
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Deploy the frontend on Lovable by clicking Share → Publish. The Railway backend handles all scraping and API calls.
+
+## Project Info
+
+**Lovable Project URL**: https://lovable.dev/projects/b4186dfd-9803-49fc-96aa-666ceca7f0f7
