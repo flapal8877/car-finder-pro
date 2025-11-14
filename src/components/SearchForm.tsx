@@ -143,7 +143,6 @@ export const SearchForm = ({ onSearch, isLoading }: SearchFormProps) => {
                     <SelectValue placeholder="Any Make" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Any Make</SelectItem>
                     {VEHICLE_MAKES.map(m => (
                       <SelectItem key={m} value={m}>{m}</SelectItem>
                     ))}
