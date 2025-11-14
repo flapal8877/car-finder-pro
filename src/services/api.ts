@@ -1,6 +1,6 @@
 import { Vehicle, SearchParams } from '@/types/vehicle';
 
-const API_BASE_URL = import.meta.env.VITE_RAILWAY_API_URL || 'http://localhost:8000';
+const API_BASE_URL = 'https://car-finder-backend-production.up.railway.app';
 
 export const searchVehicles = async (
   params: SearchParams,

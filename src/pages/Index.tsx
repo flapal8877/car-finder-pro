@@ -3,7 +3,7 @@ import { Car } from 'lucide-react';
 import { SearchForm } from '@/components/SearchForm';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { ResultsTable } from '@/components/ResultsTable';
-import { ApiConfigBanner } from '@/components/ApiConfigBanner';
+
 import { Vehicle, SearchParams } from '@/types/vehicle';
 import { searchVehicles } from '@/services/api';
 import { useToast } from '@/hooks/use-toast';
@@ -63,7 +63,7 @@ const Index = () => {
           </p>
         </div>
 
-        <ApiConfigBanner />
+        
 
         {/* Main Content */}
         <div className="grid lg:grid-cols-3 gap-8">
