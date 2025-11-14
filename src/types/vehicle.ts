@@ -14,6 +14,18 @@ export interface SearchParams {
   keyword: string;
   location: string;
   maxPrice: number;
+  make?: string;
+  model?: string;
+  minYear?: number;
+  maxYear?: number;
+  maxMileage?: number;
+  zipCode?: string;
+  radius?: number;
+  bodyStyles?: string[];
+  condition?: string;
+  fuelTypes?: string[];
+  privateOnly?: boolean;
+  searchMode?: 'fast' | 'full';
 }
 
 export interface SearchProgress {
