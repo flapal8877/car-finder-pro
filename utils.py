@@ -3,7 +3,7 @@ Utility functions for vehicle search and deduplication.
 """
 
 import re
-from fuzzywuzzy import fuzz
+from rapidfuzz import fuzz
 from typing import List, Dict
 
 def extract_number(text: str) -> int:
